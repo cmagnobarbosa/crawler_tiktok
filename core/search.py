@@ -1,16 +1,13 @@
-from datetime import datetime
 import time
+from datetime import datetime
 
-from selenium.webdriver import Chrome
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-from constants import MAX_PAGINATION
-from constants import TIKTOK_URL
-from constants import SLEEP_TIME
-from constants import LANG
+from constants import LANG, MAX_PAGINATION, SLEEP_TIME, TIKTOK_URL
 
 
 def _get_hashtags(soup_itens):
@@ -43,7 +40,11 @@ def _get_trends(results):
                 "url": url[index].find('a').get('href'),
                 "date": date[index].text,
                 "hashtags": _get_hashtags(hashtags[index]),
-                "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "shares": 0,
+                "comments": 0,
+                "likes": 0,
+
             }
             trends.append(trend)
     return trends
@@ -57,15 +58,15 @@ def get_videos(subject_to_search):
     driver.get(url_search)
     time.sleep(3)
     page = 0
-    while(page < MAX_PAGINATION):
+    while page < MAX_PAGINATION:
         try:
             element_path = "//*[@id='app']/div[2]/div[2]/div[2]/div[2]/button"
             element = driver.find_element("xpath", element_path)
             element.click()
             time.sleep(SLEEP_TIME)
             page += 1
-        except NoSuchElementException as e:
-            print('No more results', e)
+        except NoSuchElementException as error:
+            print('No more results', error)
             break
     path_element = "//*[@id='app']/div[2]/div[2]/div[2]/div[1]/div"
     results = driver.find_elements("xpath", path_element)

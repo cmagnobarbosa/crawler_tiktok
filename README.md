@@ -1,7 +1,7 @@
 ## Crawler TikTok
 
 
-Recuperar metados de videos a partir de um tema de pesquisa.
+Recuperar metadados de videos a partir de um tema de pesquisa.
 
 run main.py [subject_to_search]
 
@@ -18,6 +18,9 @@ JSON:
             'date': str,
             'hashtags': List,
             'created_at': str
+            'shares': number,
+            'comments': number,
+            '
             }
 
 ```

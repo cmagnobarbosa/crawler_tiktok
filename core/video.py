@@ -1,3 +1,6 @@
+"""Vide model"""
+from datetime import datetime
+
 
 class Video:
 

@@ -1,4 +1,4 @@
-
+from datetime import datetime
 class Comments:
     def __init__(self, user, comments):
         self.user = user
