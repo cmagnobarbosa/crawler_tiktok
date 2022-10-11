@@ -10,19 +10,18 @@ run main.py [subject_to_search]
 JSON:
 ``` JSON
 
-    trend = {
-            'title': str,
-            'username': str,
-            'views': str,
-            'url': str,
-            'date': str,
-            'hashtags': List,
-            'created_at': str
-            'shares': number,
-            'comments': number,
-            '
-            }
-
+{
+   "title":"str",
+   "username":"str",
+   "views":"str",
+   "url":"str",
+   "date":"str",
+   "hashtags":"List",
+   "created_at":"str",
+   "shares":"number",
+   "comments":"number",
+   "likes":"number"
+}
 ```
 
 ### Videos
