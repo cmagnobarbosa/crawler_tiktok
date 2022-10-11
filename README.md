@@ -5,7 +5,9 @@ Recuperar metadados de videos a partir de um tema de pesquisa.
 
 run main.py [subject_to_search]
 
-### Estrutura
+Como resultado é salvo um JSON.
+
+### Retorno
 
 JSON:
 ``` JSON
