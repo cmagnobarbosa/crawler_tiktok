@@ -1,6 +1,6 @@
-from lib2to3.pgen2 import driver
 import time
 from datetime import datetime
+from lib2to3.pgen2 import driver
 
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import NoSuchElementException
@@ -33,7 +33,8 @@ def _make_soup(driver):
 
 
 def _extract_data_from_video(driver):
-    element = driver.find_element("xpath", "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]")
+    path = "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]"
+    element = driver.find_element("xpath", path)
     soup = _make_soup(element)
     items = soup.find_all('strong', 'tiktok-wxn977-StrongText edu4zum2')
     items = [item.text for item in items]
@@ -42,6 +43,7 @@ def _extract_data_from_video(driver):
     data['comments'] = items[1]
     data['shares'] = items[2]
     return data
+
 
 def _get_trends(driver, results):
     if not results:
@@ -103,7 +105,8 @@ def get_video_metadata(url):
     driver = Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.get(url)
     time.sleep(SLEEP_TIME)
-    element = driver.find_element("xpath", "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]")
+    path = "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]"
+    element = driver.find_element("xpath", path)
     soup = _make_soup(element)
     items = soup.find_all('strong', 'tiktok-wxn977-StrongText edu4zum2')
     items = [item.text for item in items]
