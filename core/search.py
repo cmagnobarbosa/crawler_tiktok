@@ -1,3 +1,4 @@
+from lib2to3.pgen2 import driver
 import time
 from datetime import datetime
 
@@ -18,13 +19,36 @@ def _get_hashtags(soup_itens):
         hashtags.append(item.text.strip())
     return hashtags
 
-def _get_trends(results):
+
+def _open_page(driver, url):
+    driver.get(url)
+    time.sleep(SLEEP_TIME)
+    return driver
+
+
+def _make_soup(driver):
+    source = driver.get_attribute("innerHTML")
+    soup = BeautifulSoup(source, "html.parser")
+    return soup
+
+
+def _extract_data_from_video(driver):
+    element = driver.find_element("xpath", "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]")
+    soup = _make_soup(element)
+    items = soup.find_all('strong', 'tiktok-wxn977-StrongText edu4zum2')
+    items = [item.text for item in items]
+    data = {}
+    data['likes'] = items[0]
+    data['comments'] = items[1]
+    data['shares'] = items[2]
+    return data
+
+def _get_trends(driver, results):
     if not results:
         return []
 
     for video in results:
-        data = video.get_attribute("innerHTML")
-        soup = BeautifulSoup(data, "html.parser")
+        soup = _make_soup(video)
         titles = soup.find_all('div', "tiktok-1ejylhp-DivContainer ejg0rhn0")
         usernames = soup.find_all('div', "tiktok-dq7zy8-DivUserInfo etrd4pu5")
         counts = soup.find_all('div', "tiktok-1lbowdj-DivPlayIcon etrd4pu4")
@@ -41,11 +65,10 @@ def _get_trends(results):
                 "date": date[index].text,
                 "hashtags": _get_hashtags(hashtags[index]),
                 "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "shares": 0,
-                "comments": 0,
-                "likes": 0,
-
             }
+            page = _open_page(driver, trend["url"])
+            data = _extract_data_from_video(page)
+            trend.update(data)
             trends.append(trend)
     return trends
 
@@ -56,7 +79,7 @@ def get_videos(subject_to_search):
     url_search = f"{url_root}search?lang={LANG}&q={subject_to_search}"
     driver = Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.get(url_search)
-    time.sleep(3)
+    time.sleep(SLEEP_TIME)
     page = 0
     while page < MAX_PAGINATION:
         try:
@@ -70,7 +93,22 @@ def get_videos(subject_to_search):
             break
     path_element = "//*[@id='app']/div[2]/div[2]/div[2]/div[1]/div"
     results = driver.find_elements("xpath", path_element)
-    trends = _get_trends(results)
+    trends = _get_trends(driver, results)
     driver.close()
     return trends
 
+
+def get_video_metadata(url):
+    # get data from a video using the url
+    driver = Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver.get(url)
+    time.sleep(SLEEP_TIME)
+    element = driver.find_element("xpath", "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]")
+    soup = _make_soup(element)
+    items = soup.find_all('strong', 'tiktok-wxn977-StrongText edu4zum2')
+    items = [item.text for item in items]
+    data = {}
+    data['like'] = items[0]
+    data['comment'] = items[1]
+    data['share'] = items[2]
+    return data

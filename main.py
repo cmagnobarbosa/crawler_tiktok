@@ -5,7 +5,6 @@ from datetime import datetime
 from core.search import get_videos
 from core.utils import write_json
 
-
 def main():
     try:
         subject_to_search = sys.argv[1]
