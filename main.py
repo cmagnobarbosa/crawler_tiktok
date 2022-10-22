@@ -14,7 +14,10 @@ def main():
         sys.exit(1)
 
     trends = get_videos(subject_to_search)
-    name_to_save = f'{subject_to_search}_{datetime.now().second}.json'
+    instant = datetime.now()
+    day = instant.strftime('%Y-%m-%d')
+    timestamp = int(instant.timestamp())
+    name_to_save = f'{subject_to_search}_{day}_{timestamp}.json'
     write_json(trends, name_to_save)
 
 

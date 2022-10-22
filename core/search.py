@@ -115,3 +115,30 @@ def get_video_metadata(url):
     data['comment'] = items[1]
     data['share'] = items[2]
     return data
+
+
+def get_comments_from_video(url):
+    # get comments from a video using the url
+    driver = Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver.get(url)
+    time.sleep(SLEEP_TIME)
+    i = 0
+    while i < MAX_PAGINATION:
+        driver.execute_script("window.scrollTo(0,document.body.scrollHeight)", "")
+        time.sleep(SLEEP_TIME)
+        driver.execute_script("window.scrollTo(0,-50)", "")
+        i += 1
+        time.sleep(SLEEP_TIME)
+    path = "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div[1]/div[3]"
+    element = driver.find_element("xpath", path)
+    soup = _make_soup(element)
+    items = soup.find_all('div', 'tiktok-1ko6l9n-DivCommentListContainer ekjxngi0')
+    replys = []
+    for item in items:
+        comments = item.find_all('div', 'tiktok-16r0vzi-DivCommentItemContainer eo72wou0')
+    for comment in comments:
+        username = comment.find('a', 'tiktok-bhsg9d-StyledUserLinkName e1g2efjf4')['href']
+        msg = comment.find('p', 'tiktok-q9aj5z-PCommentText e1g2efjf6').text
+        reply = {'username': username, 'reply': msg}
+        replys.append(reply)
+    return replys
