@@ -1,30 +1,28 @@
 ## Crawler TikTok
 
+Retrieve video metadata related to a search on the TikTok website.
 
-Recuperar metadados de videos a partir de um tema de pesquisa.
 
 run main.py [subject_to_search]
 
 Como resultado é salvo um JSON.
 
-### Retorno
+### Return
 
 JSON:
 ``` JSON
 
 {
-   "title":"str",
-   "username":"str",
-   "views":"str",
-   "url":"str",
-   "date":"str",
-   "hashtags":"List",
-   "created_at":"str",
-   "shares":"number",
-   "comments":"number",
-   "likes":"number"
+   "title": "str",
+   "username": "str",
+   "views": "str",
+   "url": "str",
+   "date": "str",
+   "hashtags": "List",
+   "created_at": "str",
+   "shares": "number",
+   "comments": "number",
+   "likes": "number"
 }
 ```
-
-### Videos
 
