@@ -1,14 +1,13 @@
+"""Module to get data from TikTok"""
 import time
 from datetime import datetime
-from lib2to3.pgen2 import driver
 
 from bs4 import BeautifulSoup
+from constants import LANG, MAX_PAGINATION, SLEEP_TIME, TIKTOK_URL
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-
-from constants import LANG, MAX_PAGINATION, SLEEP_TIME, TIKTOK_URL
 
 
 def _get_hashtags(soup_itens):
@@ -76,7 +75,7 @@ def _get_trends(driver, results):
 
 
 def get_videos(subject_to_search):
-    # get data from a user using the username
+    """Get videos from a subject"""
     url_root = TIKTOK_URL
     url_search = f"{url_root}search?lang={LANG}&q={subject_to_search}"
     driver = Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -101,7 +100,8 @@ def get_videos(subject_to_search):
 
 
 def get_video_metadata(url):
-    # get data from a video using the url
+    """Get metadata from a video"""
+
     driver = Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.get(url)
     time.sleep(SLEEP_TIME)
@@ -118,7 +118,7 @@ def get_video_metadata(url):
 
 
 def get_comments_from_video(url):
-    # get comments from a video using the url
+    """Get comments from a video using the URL"""
     driver = Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.get(url)
     time.sleep(SLEEP_TIME)

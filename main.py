@@ -1,4 +1,4 @@
-"""main module"""
+"""Main module"""
 import sys
 from datetime import datetime
 
@@ -11,7 +11,7 @@ def main():
         print('Subject', subject_to_search)
     except (KeyError, IndexError) as error:
         print('Please provide a subject to search', error)
-        sys.exit(1)
+        sys.exit(-1)
 
     trends = get_videos(subject_to_search)
     instant = datetime.now()

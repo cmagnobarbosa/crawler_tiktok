@@ -1,4 +1,4 @@
-"""Vide model"""
+"""Video model"""
 from datetime import datetime
 
 
