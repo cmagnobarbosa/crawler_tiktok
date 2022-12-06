@@ -2,10 +2,9 @@
 
 Retrieve video metadata related to a search on the TikTok website.
 
-
+``` console
 run main.py [subject_to_search]
-
-Como resultado é salvo um JSON.
+```
 
 ### Return
 
