@@ -3,11 +3,12 @@ import time
 from datetime import datetime
 
 from bs4 import BeautifulSoup
-from constants import LANG, MAX_PAGINATION, SLEEP_TIME, TIKTOK_URL
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+
+from constants import LANG, MAX_PAGINATION, SLEEP_TIME, TIKTOK_URL
 
 
 def _get_hashtags(soup_itens):
