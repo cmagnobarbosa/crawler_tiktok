@@ -33,10 +33,10 @@ def _make_soup(driver):
 
 
 def _extract_data_from_video(driver):
-    path = "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[3]"
+    path = "//*[@id='app']/div[2]/div[2]/div[1]/div[3]/div/div[1]/div[1]/div[4]"
     element = driver.find_element("xpath", path)
     soup = _make_soup(element)
-    items = soup.find_all('strong', 'tiktok-wxn977-StrongText edu4zum2')
+    items = soup.find_all('strong')
     items = [item.text for item in items]
     data = {}
     data['likes'] = items[0]
