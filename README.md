@@ -1,4 +1,5 @@
 ## Crawler TikTok
+[![Pylint](https://github.com/cmagnobarbosa/crawler_tiktok/actions/workflows/pylint.yml/badge.svg)](https://github.com/cmagnobarbosa/crawler_tiktok/actions/workflows/pylint.yml)
 
 * Desenvolvido com objetivos educacionais
 
