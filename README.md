@@ -1,5 +1,7 @@
 ## Crawler TikTok
 
+* Desenvolvido com objetivos educacionais
+
 Crawler simples para recuperar metadados de videos no Tiktok.
 
 Simple crawler to retrieve video metadata related to a search on the TikTok website.
