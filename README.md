@@ -35,7 +35,7 @@ Constants file:
 
 ``` sheel
 TIKTOK_URL = "https://www.tiktok.com/"
-MAX_PAGINATION = 20 # Max scrools and tiktok
+MAX_PAGINATION = 20 # Max scrools on Tiktok page
 SLEEP_TIME = 3 # Time to await
 LANG = "pt-BR"
 ```
