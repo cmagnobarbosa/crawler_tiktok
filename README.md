@@ -1,12 +1,15 @@
 ## Crawler TikTok
 
-Retrieve video metadata related to a search on the TikTok website.
+Crawler simples para recuperar metadados de videos no Tiktok.
+
+Simple crawler to retrieve video metadata related to a search on the TikTok website.
 
 ``` console
 run main.py [subject_to_search]
 ```
 
-### Return
+
+### Output
 
 JSON:
 ``` JSON
@@ -24,4 +27,3 @@ JSON:
    "likes": "number"
 }
 ```
-

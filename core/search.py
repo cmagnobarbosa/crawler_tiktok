@@ -8,7 +8,7 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-from constants import LANG, MAX_PAGINATION, SLEEP_TIME, TIKTOK_URL
+from core.constants import LANG, MAX_PAGINATION, SLEEP_TIME, TIKTOK_URL
 
 
 def _get_hashtags(soup_itens):
