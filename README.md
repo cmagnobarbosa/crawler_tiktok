@@ -27,3 +27,15 @@ JSON:
    "likes": "number"
 }
 ```
+
+### Constants
+
+Constants file:
+- [Link](core/constants.py)
+
+``` sheel
+TIKTOK_URL = "https://www.tiktok.com/"
+MAX_PAGINATION = 20 # Max scrools and tiktok
+SLEEP_TIME = 3 # Time to await
+LANG = "pt-BR"
+```
